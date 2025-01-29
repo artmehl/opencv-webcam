@@ -8,19 +8,14 @@ height = 720
 filename = "output/teste.mp4"
 limit_n_frames = (fps * duration)
 
-# Inicializa a captura de vídeo (0 normalmente é a câmera padrão)
 cap = cv2.VideoCapture(0)
 
-# Verifica se a câmera foi aberta com sucesso
 if not cap.isOpened():
     print("Erro ao acessar a câmera.")
     exit()
 
-# Define a largura e altura do vídeo
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
-
-# Define o codec e cria o objeto VideoWriter
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 out = cv2.VideoWriter(filename, fourcc, fps, (width, height))
 
@@ -35,11 +30,10 @@ while (n_frames < limit_n_frames):
         break
     out.write(frame)
     n_frames+=1
-    
-# End recording
+
 cap.release()
 out.release()
-cv2.destroyAllWindows()
 
-print(f"Gravação finalizada e salva como {filename}.")
-print(f"Levou: {time.time() - start_time}")
+end_time = time.time()
+print(f"Levou: {end_time - start_time}")
+print(f"Video salvo em {filename}.")
